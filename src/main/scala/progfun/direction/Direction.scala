@@ -1,4 +1,4 @@
-package progfun
+package progfun.direction
 
 sealed trait Direction {
   def toString: String

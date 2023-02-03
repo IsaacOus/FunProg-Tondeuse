@@ -1,4 +1,4 @@
-package progfun
+package progfun.position
 
 case class Position(coords: (Int, Int)) {
   val x: Int = coords._1
