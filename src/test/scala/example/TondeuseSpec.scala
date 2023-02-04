@@ -41,4 +41,15 @@ class TondeuseSpec extends AnyFunSuite {
     }
   }
 
+  test("initialize with an invalid starting point") {
+    val tondeuseState = initializeTondeuse((-1, 0), 'N')
+    tondeuseState match {
+      case Left(_) =>
+      case _ =>
+        fail(
+          "Tondeuse should not be initialized with an invalid starting point"
+        )
+    }
+  }
+
 }
