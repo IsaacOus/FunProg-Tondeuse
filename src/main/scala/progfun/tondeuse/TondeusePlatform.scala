@@ -44,16 +44,16 @@ object TondeusePlatform {
     }
   }
 
-  private def tourner(state: EitherState): EitherState = ???
-
   private def parseCommand(
       state: EitherState,
       command: Command
   ): EitherState = {
     command match {
       case Avancer => avancer(state)
-      case Droite  => tourner(state)
-      case Gauche  => tourner(state)
+      case Droite =>
+        state.map(s => TondeuseState(s.position, s.direction.tournerDroite))
+      case Gauche =>
+        state.map(s => TondeuseState(s.position, s.direction.tournerGauche))
     }
   }
 

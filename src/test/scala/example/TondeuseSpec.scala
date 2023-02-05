@@ -1,7 +1,7 @@
 package example
 
 import org.scalatest.funsuite.AnyFunSuite
-import progfun.direction.{NORTH, SOUTH}
+import progfun.direction.{EAST, NORTH, SOUTH}
 import progfun.position.Position
 import progfun.tondeuse.TondeusePlatform._
 import progfun.tondeuse.{TondeuseError, TondeuseState}
@@ -51,20 +51,35 @@ class TondeuseSpec extends AnyFunSuite {
     assert(tondeuseState == Right(TondeuseState(Position((0, 0)), NORTH)))
   }
 
-  test("return a tondeuseState located at (1,2) when given 'A' as a command") {
+  test(
+    "return a tondeuseState located at (1,2) when given 'A' as a command starting from (1,1)"
+  ) {
     val tondeuseState =
       executeCommands(Right(TondeuseState(Position((1, 1)), NORTH)), List('A'))
 
     assert(tondeuseState == Right(TondeuseState(Position((1, 2)), NORTH)))
   }
 
-  test("return a tondeuseState located at (1,3) when given 'AA' as a command") {
+  test(
+    "return a tondeuseState located at (1,3) when given 'AA' as a command starting from (1,1)"
+  ) {
     val tondeuseState = executeCommands(
       Right(TondeuseState(Position((1, 1)), NORTH)),
       List('A', 'A')
     )
 
     assert(tondeuseState == Right(TondeuseState(Position((1, 3)), NORTH)))
+  }
+
+  test(
+    "return a tondeuseState direction EAST when given 'D' as a command starting from (1,1)"
+  ) {
+    val tondeuseState = executeCommands(
+      Right(TondeuseState(Position((1, 1)), NORTH)),
+      List('D')
+    )
+
+    assert(tondeuseState == Right(TondeuseState(Position((1, 1)), EAST)))
   }
 
 }
