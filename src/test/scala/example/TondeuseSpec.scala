@@ -45,9 +45,26 @@ class TondeuseSpec extends AnyFunSuite {
   }
 
   test("return a valid state when given an empty list of commands") {
-    val tondeuseState = executeCommands(Right(TondeuseState(Position((0, 0)), NORTH)), List())
+    val tondeuseState =
+      executeCommands(Right(TondeuseState(Position((0, 0)), NORTH)), List())
 
     assert(tondeuseState == Right(TondeuseState(Position((0, 0)), NORTH)))
+  }
+
+  test("return a tondeuseState located at (1,2) when given 'A' as a command") {
+    val tondeuseState =
+      executeCommands(Right(TondeuseState(Position((1, 1)), NORTH)), List('A'))
+
+    assert(tondeuseState == Right(TondeuseState(Position((1, 2)), NORTH)))
+  }
+
+  test("return a tondeuseState located at (1,3) when given 'AA' as a command") {
+    val tondeuseState = executeCommands(
+      Right(TondeuseState(Position((1, 1)), NORTH)),
+      List('A', 'A')
+    )
+
+    assert(tondeuseState == Right(TondeuseState(Position((1, 3)), NORTH)))
   }
 
 }
