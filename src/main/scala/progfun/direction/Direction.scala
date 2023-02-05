@@ -11,7 +11,7 @@ case object SOUTH extends Direction {
   override def toString: String = "S"
 }
 
-case object EST extends Direction {
+case object EAST extends Direction {
   override def toString: String = "E"
 }
 

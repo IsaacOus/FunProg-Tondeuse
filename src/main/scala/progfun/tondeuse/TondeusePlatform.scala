@@ -41,7 +41,7 @@ object TondeusePlatform {
     direction match {
       case 'N' => Right(NORTH)
       case 'S' => Right(SOUTH)
-      case 'E' => Right(EST)
+      case 'E' => Right(EAST)
       case 'W' => Right(WEST)
       case _   => Left(TondeuseError("Invalid direction"))
     }
