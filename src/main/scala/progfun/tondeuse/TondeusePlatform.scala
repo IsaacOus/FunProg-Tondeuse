@@ -5,8 +5,8 @@ import progfun.position.Position
 
 object TondeusePlatform {
 
-  val mapWidth = 10
-  val mapHeight = 10
+  private val mapWidth = 10
+  private val mapHeight = 10
 
   def initializeTondeuse(
       coords: (Int, Int),
@@ -16,6 +16,14 @@ object TondeusePlatform {
       direction <- toDirection(direction)
       position  <- buildPosition(coords)
     } yield TondeuseState(position, direction)
+  }
+
+  def executeCommands(
+      tondeuseState: Either[TondeuseError, TondeuseState],
+      commands: List[Char]
+  ): Either[TondeuseError, TondeuseState] = {
+    println(commands)
+   tondeuseState
   }
 
   private def buildPosition(
