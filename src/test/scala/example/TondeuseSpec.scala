@@ -4,7 +4,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import progfun.direction.{NORTH, SOUTH}
 import progfun.position.Position
 import progfun.tondeuse.TondeusePlatform._
-import progfun.tondeuse.TondeuseState
+import progfun.tondeuse.{TondeuseError, TondeuseState}
 
 class TondeuseSpec extends AnyFunSuite {
 
@@ -13,11 +13,11 @@ class TondeuseSpec extends AnyFunSuite {
     val InitialDirection = 'N'
 
     val tondeuseState = initializeTondeuse(InitialCoords, InitialDirection)
-    tondeuseState match {
-      case Right(TondeuseState(Position(InitialCoords), NORTH)) =>
-      case _ =>
-        fail("Tondeuse should be initialized with valid coords and direction")
-    }
+
+    assert(
+      tondeuseState == Right(TondeuseState(Position(InitialCoords), NORTH))
+    )
+
   }
 
   test("initialize with a valid starting point and a south direction") {
@@ -25,31 +25,23 @@ class TondeuseSpec extends AnyFunSuite {
     val InitialDirection = 'S'
 
     val tondeuseState = initializeTondeuse(InitialCoords, InitialDirection)
-    tondeuseState match {
-      case Right(TondeuseState(Position(InitialCoords), SOUTH)) =>
-      case _ =>
-        fail("Tondeuse should be initialized with valid coords and direction")
-    }
+    assert(
+      tondeuseState == Right(TondeuseState(Position(InitialCoords), SOUTH))
+    )
+
   }
 
   test("initialize with an invalid direction") {
     val tondeuseState = initializeTondeuse((0, 0), 'Z')
-    tondeuseState match {
-      case Left(_) =>
-      case _ =>
-        fail("Tondeuse should not be initialized with an invalid direction")
-    }
+
+    assert(tondeuseState == Left(TondeuseError("Invalid direction")))
   }
 
   test("initialize with an invalid starting point") {
     val tondeuseState = initializeTondeuse((-1, 0), 'N')
-    tondeuseState match {
-      case Left(_) =>
-      case _ =>
-        fail(
-          "Tondeuse should not be initialized with an invalid starting point"
-        )
-    }
+
+    assert(tondeuseState == Left(TondeuseError("Invalid starting point")))
+
   }
 
 }
