@@ -51,6 +51,13 @@ class TondeuseSpec extends AnyFunSuite {
     assert(tondeuseState == Right(TondeuseState(Position((0, 0)), NORTH)))
   }
 
+  test("return a invalid state when given an invalid command") {
+    val tondeuseState =
+      executeCommands(Right(TondeuseState(Position((0, 0)), NORTH)), List('Z'))
+
+    assert(tondeuseState == Left(TondeuseError("Invalid command")))
+  }
+
   test(
     "return a tondeuseState located at (1,2) when given 'A' as a command starting from (1,1)"
   ) {
@@ -113,4 +120,5 @@ class TondeuseSpec extends AnyFunSuite {
 
     assert(tondeuseState == Right(TondeuseState(Position((0, 1)), WEST)))
   }
+
 }
