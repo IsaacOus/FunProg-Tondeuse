@@ -3,12 +3,12 @@ name: Scala CI
 on:
   push:
     branches:
-      - main
-      - development
+      - master
+      - dev
   pull_request:
     branches:
-      - main
-      - development
+      - master
+      - dev
 
 jobs:
   build:
