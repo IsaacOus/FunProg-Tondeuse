@@ -1,4 +1,8 @@
-# Projet AL
+# Projet FunProg Tondeuse
+
+[![Scala CI](https://github.com/IsaacOus/FunProg-Tondeuse/actions/workflows/scala.yml/badge.svg)](https://github.com/IsaacOus/FunProg-Tondeuse/actions/workflows/scala.yml)
+
+[![codecov](https://codecov.io/gh/IsaacOus/FunProg-Tondeuse/branch/master/graph/badge.svg?token=W0A0U1ULZK)](https://codecov.io/gh/IsaacOus/FunProg-Tondeuse)
 
 ## Pré-requis
 
