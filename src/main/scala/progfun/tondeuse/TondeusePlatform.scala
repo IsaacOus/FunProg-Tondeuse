@@ -49,12 +49,20 @@ object TondeusePlatform {
       command: Command
   ): EitherState = {
     command match {
-      case Avancer => avancer(state)
+      case Avancer =>
+        state.flatMap { s =>
+          if (isTondeuseAtEdge(s.position)) Right(s)
+          else avancer(state)
+        }
       case Droite =>
         state.map(s => TondeuseState(s.position, s.direction.tournerDroite))
       case Gauche =>
         state.map(s => TondeuseState(s.position, s.direction.tournerGauche))
     }
+  }
+
+  private def isTondeuseAtEdge(position: Position): Boolean = {
+    position.x == 0 || position.x == mapWidth - 1 || position.y == 0 || position.y == mapHeight - 1
   }
 
   private def avancer(state: EitherState): EitherState = {
