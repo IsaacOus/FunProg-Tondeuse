@@ -58,10 +58,15 @@ object TondeusePlatform {
   }
 
   private def avancer(state: EitherState): EitherState = {
-    state.map(s => {
-      val newPosition = Position((s.position.x, s.position.y + 1))
+    state.map { s =>
+      val newPosition = s.direction match {
+        case NORTH => s.position.copy((s.position.x, s.position.y + 1))
+        case SOUTH => s.position.copy((s.position.x, s.position.y - 1))
+        case EAST  => s.position.copy((s.position.x + 1, s.position.y))
+        case WEST  => s.position.copy((s.position.x - 1, s.position.y))
+      }
       TondeuseState(newPosition, s.direction)
-    })
+    }
   }
 
   private def buildPosition(
