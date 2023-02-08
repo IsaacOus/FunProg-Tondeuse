@@ -8,7 +8,7 @@ object TondeusePlatform {
 
   private val mapWidth = 10
   private val mapHeight = 10
-  private type EitherState = Either[TondeuseError, TondeuseState]
+  private type EitherState = Either[DonneesIncorectesException, TondeuseState]
   def initializeTondeuse(
       coords: (Int, Int),
       direction: Char
@@ -35,12 +35,14 @@ object TondeusePlatform {
     }
   }
 
-  private def toCommand(command: Char): Either[TondeuseError, Command] = {
+  private def toCommand(
+      command: Char
+  ): Either[DonneesIncorectesException, Command] = {
     command match {
       case 'A' => Right(Avancer)
       case 'D' => Right(Droite)
       case 'G' => Right(Gauche)
-      case _   => Left(TondeuseError("Invalid command"))
+      case _   => Left(DonneesIncorectesException("Invalid command"))
     }
   }
 
@@ -79,22 +81,22 @@ object TondeusePlatform {
 
   private def buildPosition(
       coords: (Int, Int)
-  ): Either[TondeuseError, Position] = {
+  ): Either[DonneesIncorectesException, Position] = {
     val (x, y) = coords
     if (x < 0 || x > mapWidth || y < 0 || y > mapHeight)
-      Left(TondeuseError("Invalid starting point"))
+      Left(DonneesIncorectesException("Invalid starting point"))
     else Right(Position(coords))
   }
 
   private def toDirection(
       direction: Char
-  ): Either[TondeuseError, Direction] = {
+  ): Either[DonneesIncorectesException, Direction] = {
     direction match {
       case 'N' => Right(NORTH)
       case 'S' => Right(SOUTH)
       case 'E' => Right(EAST)
       case 'W' => Right(WEST)
-      case _   => Left(TondeuseError("Invalid direction"))
+      case _   => Left(DonneesIncorectesException("Invalid direction"))
     }
   }
 }

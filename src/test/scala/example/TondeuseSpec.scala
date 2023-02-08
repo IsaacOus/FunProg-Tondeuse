@@ -4,7 +4,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import progfun.direction.{EAST, NORTH, SOUTH, WEST}
 import progfun.position.Position
 import progfun.tondeuse.TondeusePlatform._
-import progfun.tondeuse.{TondeuseError, TondeuseState}
+import progfun.tondeuse.{DonneesIncorectesException, TondeuseState}
 
 class TondeuseSpec extends AnyFunSuite {
 
@@ -34,13 +34,19 @@ class TondeuseSpec extends AnyFunSuite {
   test("initialize with an invalid direction") {
     val tondeuseState = initializeTondeuse((0, 0), 'Z')
 
-    assert(tondeuseState == Left(TondeuseError("Invalid direction")))
+    assert(
+      tondeuseState == Left(DonneesIncorectesException("Invalid direction"))
+    )
   }
 
   test("initialize with an invalid starting point") {
     val tondeuseState = initializeTondeuse((-1, 0), 'N')
 
-    assert(tondeuseState == Left(TondeuseError("Invalid starting point")))
+    assert(
+      tondeuseState == Left(
+        DonneesIncorectesException("Invalid starting point")
+      )
+    )
 
   }
 
@@ -55,7 +61,7 @@ class TondeuseSpec extends AnyFunSuite {
     val tondeuseState =
       executeCommands(Right(TondeuseState(Position((0, 0)), NORTH)), List('Z'))
 
-    assert(tondeuseState == Left(TondeuseError("Invalid command")))
+    assert(tondeuseState == Left(DonneesIncorectesException("Invalid command")))
   }
 
   test(
