@@ -6,8 +6,8 @@ import progfun.position.Position
 
 object TondeusePlatform {
 
-  private val mapWidth = 10
-  private val mapHeight = 10
+  private val mapWidth: Int = 5
+  private val mapHeight: Int = 5
   private type EitherState = Either[DonneesIncorectesException, TondeuseState]
   def initializeTondeuse(
       coords: (Int, Int),
@@ -53,7 +53,7 @@ object TondeusePlatform {
     command match {
       case Avancer =>
         state.flatMap { s =>
-          if (isTondeuseAtEdge(s.position)) Right(s)
+          if (isTondeuseAtEdge(s.position, s.direction)) Right(s)
           else avancer(state)
         }
       case Droite =>
@@ -63,8 +63,14 @@ object TondeusePlatform {
     }
   }
 
-  private def isTondeuseAtEdge(position: Position): Boolean = {
-    position.x == 0 || position.x == mapWidth - 1 || position.y == 0 || position.y == mapHeight - 1
+  private def isTondeuseAtEdge(
+      position: Position,
+      direction: Direction
+  ): Boolean = {
+    (position.x == 0 && direction == WEST) ||
+    (position.x == mapWidth && direction == EAST) ||
+    (position.y == 0 && direction == SOUTH) ||
+    (position.y == mapHeight && direction == NORTH)
   }
 
   private def avancer(state: EitherState): EitherState = {

@@ -131,11 +131,11 @@ class TondeuseSpec extends AnyFunSuite {
     "do nothing when given 'A' as a command when the tondeuse is located at the top of the platform and facing NORTH"
   ) {
     val tondeuseState = executeCommands(
-      Right(TondeuseState(Position((1, 9)), NORTH)),
+      Right(TondeuseState(Position((1, 5)), NORTH)),
       List('A')
     )
 
-    assert(tondeuseState == Right(TondeuseState(Position((1, 9)), NORTH)))
+    assert(tondeuseState == Right(TondeuseState(Position((1, 5)), NORTH)))
   }
 
   test(
@@ -164,10 +164,31 @@ class TondeuseSpec extends AnyFunSuite {
     "do nothing when given 'A' as a command when the tondeuse is located at the right of the platform and facing EAST"
   ) {
     val tondeuseState = executeCommands(
-      Right(TondeuseState(Position((9, 1)), EAST)),
+      Right(TondeuseState(Position((5, 1)), EAST)),
       List('A')
     )
 
-    assert(tondeuseState == Right(TondeuseState(Position((9, 1)), EAST)))
+    assert(tondeuseState == Right(TondeuseState(Position((5, 1)), EAST)))
+  }
+
+  test(
+    "return a tondeuse located at (1,3) when given 'GAGAGAGAA' as a command starting from (1,2) and facing NORTH"
+  ) {
+    val tondeuseState = executeCommands(
+      Right(TondeuseState(Position((1, 2)), NORTH)),
+      List('G', 'A', 'G', 'A', 'G', 'A', 'G', 'A', 'A')
+    )
+
+    assert(tondeuseState == Right(TondeuseState(Position((1, 3)), NORTH)))
+  }
+  test(
+    "return a tondeuse located at (5,1) when given 'AADAADADDA' as a command starting from (3,3) and facing NORTH"
+  ) {
+    val tondeuseState = executeCommands(
+      Right(TondeuseState(Position((3, 3)), EAST)),
+      List('A', 'A', 'D', 'A', 'A', 'D', 'A', 'D', 'D', 'A')
+    )
+
+    assert(tondeuseState == Right(TondeuseState(Position((5, 1)), EAST)))
   }
 }
