@@ -1,4 +1,4 @@
-package example
+package progfun.tondeuse
 
 import org.scalatest.funsuite.AnyFunSuite
 import progfun.direction.{EAST, NORTH, SOUTH, WEST}
