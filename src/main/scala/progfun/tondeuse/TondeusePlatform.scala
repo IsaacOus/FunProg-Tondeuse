@@ -8,7 +8,7 @@ object TondeusePlatform {
 
   private val mapWidth: Int = 5
   private val mapHeight: Int = 5
-  private type EitherState = Either[DonneesIncorectesException, TondeuseState]
+  type EitherState = Either[DonneesIncorectesException, TondeuseState]
   def initializeTondeuse(
       coords: (Int, Int),
       direction: Char

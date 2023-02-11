@@ -2,7 +2,7 @@ package progfun.parsing
 
 import better.files._
 
-class Parser(file: File) {
+class TondeuseParser(file: File) {
 
   private val input = extractLines(this.file)
 
@@ -24,11 +24,13 @@ class Parser(file: File) {
   }
   def extractTondeusePosition(): List[(Int, Int, String)] = {
     val lines = input.split("\n").filter(line => line.count(_.isDigit) >= 2)
-    lines.flatMap(line => {
-      val parts = line.split(" ")
-      if (parts.length == 3) Some((parts(0).toInt, parts(1).toInt, parts(2)))
-      else None
-    }).toList
+    lines
+      .flatMap(line => {
+        val parts = line.split(" ")
+        if (parts.length == 3) Some((parts(0).toInt, parts(1).toInt, parts(2)))
+        else None
+      })
+      .toList
   }
   def extractCommands(): List[String] = {
     val lines = input.split("\n").filter(line => line.count(_.isDigit) == 0)
