@@ -10,9 +10,6 @@ on:
       - master
       - dev
 
-ignore:
-    - "**/Main.scala"
-    - "**Spec.scala"
 
 jobs:
   build:
