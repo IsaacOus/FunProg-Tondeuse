@@ -4,8 +4,9 @@ import better.files.File
 import play.api.libs.json.Json
 import progfun.tondeuse.TondeuseState
 
-class ExportFile {
-  def exportToJSON(
+class ExportJSON extends Export {
+
+  def export(
       path: String,
       mapSize: (Int, Int),
       tondeuses: List[(TondeuseState, TondeuseState)],

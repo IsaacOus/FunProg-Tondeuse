@@ -1,7 +1,7 @@
 package progfun
 
 import better.files.File
-import progfun.`export`.ExportFile
+import progfun.`export`.{ExportCSV, ExportJSON}
 import progfun.parsing.TondeuseParser
 import progfun.tondeuse.TondeusePlatform.{EitherState, executeCommands, initializeTondeuse}
 import progfun.tondeuse.TondeuseState
@@ -35,6 +35,9 @@ object Main extends App {
    }
 
 
-    val export = new ExportFile()
-    export.exportToJSON("src/main/resources/output-json/sample_output", mapSize, tondeusesIntialState.zip(tondeusesStatesAfterCommandsList), commands)
+    val exportJSON = new ExportJSON()
+    exportJSON.export("src/main/resources/output-json/sample_output", mapSize, tondeusesIntialState.zip(tondeusesStatesAfterCommandsList), commands)
+
+  val exportCSV = new ExportCSV()
+    exportCSV.export("src/main/resources/output-csv/sample_output", mapSize, tondeusesIntialState.zip(tondeusesStatesAfterCommandsList), commands)
 }
