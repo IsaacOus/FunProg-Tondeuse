@@ -24,9 +24,10 @@ class ExportFile {
             "y"         -> tondeuseIntial.position._2,
             "direction" -> tondeuseIntial.direction.toString
           ),
-          "instructions" -> (commands(
+          "instructions" ->Json.toJson(
+            commands(
             tondeuses.indexOf((tondeuseIntial, tondeuseEnd))
-          )),
+          ).toCharArray.toList.map(_.toString)),
           "fin" -> Json.obj(
             "point" -> Json.obj(
               "x" -> tondeuseEnd.position._1,
