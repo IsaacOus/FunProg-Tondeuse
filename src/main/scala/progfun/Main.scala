@@ -1,10 +1,10 @@
 package progfun
 
 import better.files.File
-import progfun.`export`.Export
+import progfun.`export`.ExportFile
 import progfun.parsing.TondeuseParser
 import progfun.tondeuse.TondeusePlatform.{EitherState, executeCommands, initializeTondeuse}
-import progfun.tondeuse.{TondeuseState}
+import progfun.tondeuse.TondeuseState
 
 object Main extends App {
   val file: File = File("src/main/resources/input/sample_input.txt")
@@ -35,6 +35,6 @@ object Main extends App {
    }
 
 
-    val export = new Export()
+    val export = new ExportFile()
     export.exportToJSON("src/main/resources/output-json/sample_output", mapSize, tondeusesIntialState.zip(tondeusesStatesAfterCommandsList), commands)
 }
