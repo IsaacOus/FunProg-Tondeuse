@@ -4,3 +4,4 @@ codecov:
 ignore:
   - "**/Main.scala"
   - "**Spec.scala"
+  - "**/export/**"
